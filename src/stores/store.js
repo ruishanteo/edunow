@@ -1,10 +1,10 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import { notificationsReducer } from "components/Notifications";
+import { questionsReducer } from "./questionStore";
 
 export const store = configureStore({
   reducer: {
-    notifications: notificationsReducer,
+    questions: questionsReducer,
   },
 });
 

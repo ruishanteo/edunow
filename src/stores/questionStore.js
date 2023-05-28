@@ -1,0 +1,46 @@
+import { createSlice } from "@reduxjs/toolkit";
+
+import { db } from "hooks/Firebase";
+import { addDoc, getDocs, collection } from "firebase/firestore";
+
+const questionsSlice = createSlice({
+  name: "questions",
+  initialState: {
+    questions: [],
+    currentQuestionNumber: 0,
+    currentQuestion: undefined,
+  },
+  reducers: {
+    goNext: (state) => {
+      state.currentQuestionNumber += 1;
+      state.currentQuestion = state.questions[state.currentQuestionNumber];
+    },
+    goToQuestion: (state, action) => {
+      state.currentQuestionNumber = action.payload;
+      state.currentQuestion = state.questions[state.currentQuestionNumber];
+    },
+    saveQuestionsToStore: (state, action) => {
+      state.questions = action.payload;
+      state.currentQuestionNumber = 1;
+      state.currentQuestion = state.questions[state.currentQuestionNumber];
+    },
+  },
+});
+
+export async function fetchQuestions(dispatch, getState) {
+  const response = await getDocs(collection(db, "questions"));
+  const questions = response.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
+  dispatch(questionsSlice.actions.saveQuestionsToStore(questions));
+}
+
+export function saveQuestions(questions) {
+  return async (dispatch, getState) => {
+    questions.forEach((question) => {
+      addDoc(collection(db, "questions"), question);
+    });
+  };
+}
+
+export const { goNext, goToQuestion, saveQuestionsToStore } =
+  questionsSlice.actions;
+export const questionsReducer = questionsSlice.reducer;

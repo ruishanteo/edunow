@@ -1,0 +1,39 @@
+Question: Which country is known as the "Land of the Rising Sun"?
+Options: China,Japan,India,Australia
+Answer: 2
+
+Question: What is the capital city of Australia?
+Options: Sydney,Canberra,Melbourne,Perth
+Answer: 2
+
+Question: Who painted the Mona Lisa?
+Options: Vincent van Gogh,Pablo Picasso,Leonardo da Vinci,Michelangelo
+Answer: 3
+
+Question: Which planet is known as the "Red Planet"?
+Options: Jupiter,Venus,Mars,Saturn
+Answer: 3
+
+Question: What is the largest ocean in the world?
+Options: Indian Ocean,Atlantic Ocean,Arctic Ocean, Pacific Ocean
+Answer: 4
+
+Question: Which famous scientist developed the theory of relativity?
+Options: Isaac Newton,Albert Einstein,Marie Curie,Charles Darwin
+Answer: 2
+
+Question: Who is the author of the Harry Potter book series?
+Options: J.R.R. Tolkien,J.K. Rowling,Suzanne Collins,Roald Dahl
+Answer: 2
+
+Question: What is the tallest mountain in the world?
+Options: Mount Kilimanjaro,Mount Everest,Mount Fuji,Mount McKinley
+Answer: 2
+
+Question: Which animal is known for its black and white stripes?
+Options: Lion,Zebra,Tiger,Giraffe
+Answer: 2
+
+Question: What is the capital city of Singapore?
+Options: Kuala Lumpur,Bangkok,Jakarta,Singapore
+Answer: 4
