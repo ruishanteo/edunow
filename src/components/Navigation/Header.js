@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import { logout } from "hooks/FirebaseHooks";
 
 import {
   AppBar,
@@ -17,7 +19,7 @@ import MenuIcon from "@mui/icons-material/Menu";
 
 const Header = () => {
   const [anchorElUser, setAnchorElUser] = useState(null);
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -28,7 +30,7 @@ const Header = () => {
   };
 
   const signOut = () => {
-    console.log("signout");
+    logout().then(() => navigate("/landing"));
   };
 
   return (

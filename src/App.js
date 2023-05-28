@@ -1,20 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { SnackbarProvider } from "notistack";
 
-import Header from "components/Navigation/Header.js";
-import {
-  Notifications,
-  NotificationDismissButton,
-} from "components/Notifications";
-import Home from "Pages/Home.js";
-import Page from "Pages/Page.js";
 import store from "stores/store.js";
+
+import { useAuth } from "hooks/FirebaseHooks";
+import { AuthenticatedRoutes, PublicRoutes } from "routes/";
 
 import desktopImage from "assets/images/backgroundDesktop.jpg";
 import mobileImage from "assets/images/backgroundMobile.jpg";
+
+// import { saveQuestions } from "stores/questionStore";
+// import { loadQuestions } from "Pages/quiz/QuestionsReader";
+// import { Button } from "@mui/material";
 
 const theme = createTheme({
   typography: {
@@ -42,6 +41,8 @@ const theme = createTheme({
 });
 
 const App = () => {
+  const user = useAuth();
+
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const imageUrl = windowWidth >= 915 ? desktopImage : mobileImage;
 
@@ -61,35 +62,30 @@ const App = () => {
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ReduxProvider store={store}>
-          <SnackbarProvider
-            maxSnack={5}
-            action={(id) => <NotificationDismissButton id={id} />}
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "center",
+          {/* <Button
+            onClick={async () => {
+              console.log("here");
+              const data = await loadQuestions();
+              store.dispatch(saveQuestions(data));
             }}
           >
-            <>
-              <div
-                className="App"
-                style={{
-                  backgroundImage: `url(${imageUrl})`,
-                  height: "100vh",
-                  backgroundPosition: "center",
-                  backgroundSize: "cover",
-                  overflowY: "scroll",
-                }}
-              >
-                <Notifications />
-                <Header />
-                <Routes>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/home" element={<Home />} />
-                  <Route path="/page" element={<Page />} />
-                </Routes>
-              </div>
-            </>
-          </SnackbarProvider>
+            YES
+          </Button> */}
+
+          <>
+            <div
+              className="App"
+              style={{
+                backgroundImage: `url(${imageUrl})`,
+                height: "100vh",
+                backgroundPosition: "center",
+                backgroundSize: "cover",
+                overflowY: "scroll",
+              }}
+            >
+              {user ? <AuthenticatedRoutes /> : <PublicRoutes />}
+            </div>
+          </>
         </ReduxProvider>
       </BrowserRouter>
     </ThemeProvider>
