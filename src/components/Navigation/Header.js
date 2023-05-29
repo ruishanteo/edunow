@@ -132,6 +132,9 @@ const Header = () => {
               <MenuItem component="a" href="/home">
                 <Typography textAlign="center">Home</Typography>
               </MenuItem>
+              <MenuItem component="a" href="/leaderboard">
+                <Typography textAlign="center">Leaderboard</Typography>
+              </MenuItem>
               <MenuItem onClick={signOut}>
                 <Typography textAlign="center">Sign out</Typography>
               </MenuItem>
