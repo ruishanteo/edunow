@@ -1,19 +1,24 @@
 import raw from "./QuestionBank.txt";
 
 const formatData = (data) => {
-  const exportedData = [];
-  data.split("\n\n").map((entry) => {
+  return data.split("\n\n").map((entry) => {
     const question = { Question: "", Options: "", Answer: "" };
+
     entry.split("\n").forEach((keyValue) => {
       const split = keyValue.split(": ");
       const key = split[0];
       const value = split[1];
       question[key] = value;
     });
+    question.Answer = parseInt(question.Answer);
     question.Options = question.Options.split(",");
-    exportedData.push(question);
+    question.Options = question.Options.map((option, index) => ({
+      option: option,
+      correct: index === question.Answer - 1,
+    }));
+
+    return question;
   });
-  return exportedData;
 };
 
 export const loadQuestions = async () => {
