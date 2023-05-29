@@ -2,18 +2,17 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import { Provider as ReduxProvider } from "react-redux";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 import store from "stores/store.js";
 
-import { useAuth } from "hooks/FirebaseHooks";
+import { auth } from "hooks/Firebase";
 import { AuthenticatedRoutes, PublicRoutes } from "routes/";
 
 import desktopImage from "assets/images/backgroundDesktop.jpg";
 import mobileImage from "assets/images/backgroundMobile.jpg";
 
-// import { saveQuestions } from "stores/questionStore";
-// import { loadQuestions } from "Pages/quiz/QuestionsReader";
-// import { Button } from "@mui/material";
+import { Typography } from "@mui/material";
 
 const theme = createTheme({
   typography: {
@@ -41,7 +40,7 @@ const theme = createTheme({
 });
 
 const App = () => {
-  const user = useAuth();
+  const [user, loading] = useAuthState(auth);
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const imageUrl = windowWidth >= 915 ? desktopImage : mobileImage;
@@ -58,20 +57,14 @@ const App = () => {
     };
   }, []);
 
+  if (loading) {
+    return <Typography>Loading...</Typography>;
+  }
+
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <ReduxProvider store={store}>
-          {/* <Button
-            onClick={async () => {
-              console.log("here");
-              const data = await loadQuestions();
-              store.dispatch(saveQuestions(data));
-            }}
-          >
-            YES
-          </Button> */}
-
           <>
             <div
               className="App"
