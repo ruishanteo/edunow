@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-import { CardActionArea, Typography } from "@mui/material";
+import { CardActionArea } from "@mui/material";
 
 export const OptionButton = ({ correctOption, onClickDoWhat, children }) => {
   const [active, setActive] = useState(false);

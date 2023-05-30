@@ -10,7 +10,6 @@ import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 const Leaderboard = () => {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users.users);
-  const currentScore = useSelector((state) => state.users.currentScore);
 
   const onUpdate = useCallback(() => {
     dispatch(fetchUsers);
