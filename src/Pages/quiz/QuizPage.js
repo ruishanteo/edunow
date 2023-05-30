@@ -1,14 +1,17 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-import store from "stores/store";
-import { fetchQuestions, selectOption } from "stores/questionStore";
+import { useAuth } from "hooks/FirebaseHooks";
 
-import { Box, Card, CardActionArea, Typography } from "@mui/material";
+import { fetchQuestions, selectOption } from "stores/questionStore";
+import { updateCurrentUser } from "stores/userStore";
+
+import { Box, Card, Typography } from "@mui/material";
 
 import { OptionButton } from "components/OptionButton";
 
 const QuizPage = () => {
+  const user = useAuth();
   const dispatch = useDispatch();
   const currQuestion = useSelector((state) => state.questions.currentQuestion);
   const currQuestionNumber = useSelector(
@@ -19,21 +22,24 @@ const QuizPage = () => {
   );
   const score = useSelector((state) => state.questions.score);
 
-  const handleSelectOption = (optionIndex) =>
-    dispatch(selectOption(optionIndex));
-  const onUpdate = () => {
-    store.dispatch(fetchQuestions);
-  };
+  const handleSelectOption = useCallback(
+    (optionIndex) => dispatch(selectOption(optionIndex)),
+    [dispatch]
+  );
+  const onUpdate = useCallback(() => {
+    dispatch(fetchQuestions);
+  }, [dispatch]);
 
   useEffect(() => {
     onUpdate();
-  }, []);
+  }, [onUpdate]);
 
   if (!currQuestion) {
     return <Typography>Loading...</Typography>;
   }
 
   if (currQuestionNumber === totalQuestionNumber) {
+    dispatch(updateCurrentUser(user, score));
     return (
       <Box align="center" justifyContent="center">
         <Box height="20vh" />
@@ -42,7 +48,7 @@ const QuizPage = () => {
         </Typography>
         <Box height="10vh" />
         <Typography sx={{ color: "white", fontSize: 30 }}>
-          You have scored {score}/{totalQuestionNumber}.
+          You scored {score}/{totalQuestionNumber}.
         </Typography>
       </Box>
     );
