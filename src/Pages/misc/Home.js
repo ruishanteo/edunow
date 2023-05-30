@@ -31,6 +31,12 @@ export const Home = () => {
         >
           WELCOME
         </Typography>
+        <Typography
+          variant="h5"
+          sx={{ fontFamily: "Roboto", mt: 2, mb: 8, color: "white" }}
+        >
+          Test your general knowledge here!
+        </Typography>
         <Button variant="contained" href="/quiz">
           Go to Quiz
         </Button>

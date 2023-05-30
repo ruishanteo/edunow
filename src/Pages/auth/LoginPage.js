@@ -25,11 +25,15 @@ export default function LoginPage() {
 
   return (
     <Box align="center">
+      <Box height="15vh" />
       <Box
         sx={{
           align: "center",
           backgroundColor: "rgba(255,255,255,0.5)",
-          width: "50vw",
+          width: "40vw",
+          height: "60vh",
+          justifyContent: "center",
+          display: "flex",
         }}
       >
         <Container component="main" maxWidth="xs">
@@ -58,7 +62,6 @@ export default function LoginPage() {
                 label="Email Address"
                 name="email"
                 autoComplete="email"
-                defaultValue="test@test.com"
                 autoFocus
               />
               <TextField
@@ -70,7 +73,6 @@ export default function LoginPage() {
                 type="password"
                 id="password"
                 autoComplete="current-password"
-                defaultValue="123456"
               />
               <Button
                 type="submit"
@@ -92,7 +94,7 @@ export default function LoginPage() {
                 </Grid>
                 <Grid item>
                   <Link
-                    href="/registration"
+                    href="/register"
                     variant="body2"
                     style={{ color: "black" }}
                   >

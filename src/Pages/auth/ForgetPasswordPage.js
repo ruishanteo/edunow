@@ -11,11 +11,15 @@ export default function ForgetPasswordPage() {
 
   return (
     <Box align="center">
+      <Box height="15vh" />
       <Box
         sx={{
           align: "center",
           backgroundColor: "rgba(255,255,255,0.5)",
-          width: "50vw",
+          width: "40vw",
+          height: "40vh",
+          justifyContent: "center",
+          display: "flex",
         }}
       >
         <Container component="main" maxWidth="xs">
