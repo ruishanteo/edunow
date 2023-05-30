@@ -20,13 +20,6 @@ export const Home = () => {
         >
           WELCOME
         </Typography>
-
-        <Typography
-          variant="h5"
-          sx={{ fontFamily: "Roboto", mt: 2, mb: 5, color: "white" }}
-        >
-          U R SIGNED IN
-        </Typography>
         <Button variant="contained" href="/quiz">
           Go to Quiz
         </Button>

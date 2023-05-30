@@ -19,7 +19,7 @@ const Landing = () => {
             fontSize: 70,
           }}
         >
-          WEBNAME
+          EDUNOW
         </Typography>
 
         <Typography

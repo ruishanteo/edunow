@@ -1,8 +1,28 @@
+import { useCallback, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { fetchUsers } from "stores/userStore";
+
 import { Box, Typography } from "@mui/material";
 
 import EmojiEventsIcon from "@mui/icons-material/EmojiEvents";
 
 const Leaderboard = () => {
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.users.users);
+  const currentScore = useSelector((state) => state.users.currentScore);
+
+  const onUpdate = useCallback(() => {
+    dispatch(fetchUsers);
+  }, [dispatch]);
+  useEffect(() => onUpdate(), [onUpdate]);
+
+  if (!users) {
+    return <Typography>No users...</Typography>;
+  }
+
+  const usersMutatable = [...users];
+
   return (
     <Box align="center">
       <Box sx={{ height: "10vh" }} />
@@ -20,56 +40,29 @@ const Leaderboard = () => {
       >
         Leaderboard
       </Typography>
-
-      <Box
-        sx={{
-          backgroundColor: "rgba(255,255,255,0.7)",
-          width: "50vw",
-          height: "8vh",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          mt: 2,
-        }}
-      >
-        <Typography sx={{ fontSize: 30 }}>
-          1. This is the name of the user
-        </Typography>
-      </Box>
-
-      <Box
-        sx={{
-          backgroundColor: "rgba(255,255,255,0.7)",
-          width: "50vw",
-          height: "8vh",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          mt: 2,
-        }}
-      >
-        <Typography sx={{ fontSize: 30 }}>
-          2. This is the name of the user
-        </Typography>
-      </Box>
-      <Box
-        sx={{
-          backgroundColor: "rgba(255,255,255,0.7)",
-          width: "50vw",
-          height: "8vh",
-          alignItems: "center",
-          display: "flex",
-          justifyContent: "center",
-          flexDirection: "column",
-          mt: 2,
-        }}
-      >
-        <Typography sx={{ fontSize: 30 }}>
-          3. This is the name of the user
-        </Typography>
-      </Box>
+      {usersMutatable
+        .sort((a, b) => b.score - a.score)
+        .map((user, index) => {
+          return (
+            <Box
+              key={index}
+              sx={{
+                backgroundColor: "rgba(255,255,255,0.7)",
+                width: "50vw",
+                height: "8vh",
+                alignItems: "center",
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
+                mt: 2,
+              }}
+            >
+              <Typography sx={{ fontSize: 30 }}>
+                {`${index + 1}. ${user.displayName}, Score: ${user.score}`}
+              </Typography>
+            </Box>
+          );
+        })}
     </Box>
   );
 };

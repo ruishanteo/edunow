@@ -9,7 +9,7 @@ import {
 } from "firebase/auth";
 
 import store from "stores/store";
-import { saveCurrentUser } from "stores/userStore";
+import { updateCurrentUser } from "stores/userStore";
 
 import { auth } from "./Firebase";
 
@@ -28,8 +28,8 @@ const logInWithEmailAndPassword = async (email, password) => {
 const registerWithEmailAndPassword = async (name, email, password) => {
   return await createUserWithEmailAndPassword(auth, email, password)
     .then(async (response) => {
-      saveCurrentUser();
       await updateProfile(response.user, { displayName: name });
+      store.dispatch(updateCurrentUser(response.user, 0));
     })
     .catch(handleErrorMessage);
 };
