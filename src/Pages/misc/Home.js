@@ -2,11 +2,22 @@ import React from "react";
 
 import { Box, Button, Typography } from "@mui/material";
 
+import SchoolIcon from "@mui/icons-material/School";
+
 export const Home = () => {
   return (
     <Box align="center" variant="text">
       <Box height="110px" />
       <Box>
+        <SchoolIcon
+          sx={{
+            color: "white",
+            fontFamily: "Roboto",
+            letterSpacing: 10,
+            fontWeight: 800,
+            fontSize: 70,
+          }}
+        />
         <Typography
           mb={5}
           variant="h2"
