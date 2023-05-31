@@ -1,7 +1,5 @@
 # EDUNOW
 
-https://edunow.netlify.app
-
 The EDUNOW is a web application that allows users to participate in quizzes, track their scores, and view the leaderboard. It provides an interactive and engaging experience for users to test their knowledge and compete with others.
 
 ## Features
